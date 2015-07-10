@@ -28,23 +28,18 @@
   <script src="jspm_packages/system.js"></script>
   <script src="config.js"></script>
   <script>
-    /**
-     * Conditionally loads webcomponents polyfill if needed.
-     * Credit: Glen Maddern (geelen on GitHub)
-     */
-    var webComponentsSupported = ('registerElement' in document
-      && 'import' in document.createElement('link')
-      && 'content' in document.createElement('template'));
+    /** * Conditionally loads webcomponents polyfill if needed. * Credit: Glen Maddern (geelen) & Paul Lewis (paullewis) */
+    var webComponentsSupported = ('registerElement' in document && 'import' in document.createElement('link') && 'content' in document.createElement('template'));
 
     if (!webComponentsSupported) {
       System.import('webcomponentsjs-lite').then(function() {
-        lazyLoadPolymerAndElements();
+        loadElements();
       });
     } else {
-      lazyLoadPolymerAndElements();
+      loadElements();
     }
 
-    function lazyLoadPolymerAndElements () {
+    function loadElements() {
       // Use Shadow DOM if available
       window.Polymer = window.Polymer || {};
       window.Polymer.dom = 'shadow';
