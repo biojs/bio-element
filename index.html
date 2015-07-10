@@ -28,9 +28,30 @@
   <script src="jspm_packages/system.js"></script>
   <script src="config.js"></script>
   <script>
-    System.import('webcomponentsjs-lite').then(function() {
+    /**
+     * Conditionally loads webcomponents polyfill if needed.
+     * Credit: Glen Maddern (geelen on GitHub)
+     */
+    var webComponentsSupported = ('registerElement' in document
+      && 'import' in document.createElement('link')
+      && 'content' in document.createElement('template'));
+
+    if (!webComponentsSupported) {
+      System.import('webcomponentsjs-lite').then(function() {
+        lazyLoadPolymerAndElements();
+      });
+    } else {
+      lazyLoadPolymerAndElements();
+    }
+
+    function lazyLoadPolymerAndElements () {
+      // Use Shadow DOM if available
+      window.Polymer = window.Polymer || {};
+      window.Polymer.dom = 'shadow';
+
+      // Import elements
       System.import('./bio-element');
-    });
+    }
   </script>
 
 </body>
