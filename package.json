@@ -1,6 +1,6 @@
 {
   "name": "bio-element",
-  "main": "main",
+  "main": "bio-element",
   "jspm": {
     "directories": {},
     "dependencies": {
