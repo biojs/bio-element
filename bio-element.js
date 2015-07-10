@@ -1,4 +1,4 @@
-var Polymer  = require('polymer');
+var Polymer = require('polymer');
 
 // we can't use bio-container in the name when we use systemjs mappings
 require('./bio-element.html!html');
